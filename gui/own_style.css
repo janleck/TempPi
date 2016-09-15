@@ -1,0 +1,26 @@
+[class*="col-"] {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background-color: #eee;
+	background-color: rgba(86, 61, 124, .15);
+	border: 1px solid #ddd;
+	border: 1px solid rgba(86, 61, 124, .2);
+}
+
+.row-eq-height {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+
+[class*="kachel-"] {text-align: center;}
+.kachel-s {height: 100px;}
+.kachel-m {
+	height: 300px;
+	padding-top: 150px;
+	font-size: 4em;
+	line-height: 0;
+}
+.kachel-l {height: 500px;}
