@@ -13,6 +13,14 @@ function getInfos(dir, callback){
 			);
 }
 
+
+function refreshMaximums(){
+	getInfos('now', function(r) {
+		global temperaturen = [1,2,3,4]; // r.
+		global feuchtigkeiten = [2,3,4,2]; // r.
+	})
+}
+
 function refreshNow() {
 	getInfos('now', function(r){
 		$('#temp').text(r.T);
@@ -23,8 +31,9 @@ function refreshNow() {
 
 function refreshHours() {
 	getInfos('hours', function(r){
-		$('#temp').text("");
-		$('#zeit').text("Durchschnitt der Stunde");
-		$('#humm').text("");
+		for (var index = 0; index < 24; index++) {
+			d[index] = r.T[index];
+		}
 	});
+	return d;
 }
