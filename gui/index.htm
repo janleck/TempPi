@@ -56,58 +56,85 @@
 	<script type="text/javascript" src="jquery/jquery-3.1.0.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="chart/Chart.bundle.min.js"></script>
+	<script src="chart/tooltip_plugin.js"></script>
 	<script src="loader.js"></script>
 
-	<script>
+<script>
 	// Init
-	var ctx = document.getElementById("myChart");
-	var myChart = new Chart(ctx, {
-		type: 'bar',
-		data: {
+	var ctx = $('#myChart').get(0).getContext('2d');
+	var barChartData = {
 			labels: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
 			datasets: [{
 				label: 'Temp(max.)',
-				data: [0,0,0,0,0,0,0],
-				backgroundColor: 'rgb(255,204,0)',
-			},
-			{
+				data: [1,2,3,3,2,2,1],
+				backgroundColor: 'rgb(249,78,35)',
+				},
+				{
 				label: 'Humm(max.)',
 				data: [0,0,0,0,0,0,0],
 				backgroundColor: 'rgb(21,65,118)',
-			}]
-		},
-		options: {
-			animation: false,
-			responsive : true,
-			tooltipTemplate: "<%= value %>",
-			tooltipFillColor: "rgba(0,0,0,0)",
-			tooltipFontColor: "#444",
-			tooltipEvents: [],
-			tooltipCaretSize: 0,
-			onAnimationComplete: function(){
-				this.showTooltip(this.datasets[0].bars, true);
-				this.showTooltip(this.datasets[1].bars, true);
-			},
-			scales: {
-				yAxes: [{
-					ticks: {
-						beginAtZero:true
-					}
-				}],
-				xAxes: [{
-					gridLines: {
-						display:false
-                	}
-				}],
+				}
+			],
+		};
+	var options = {
+		showAllTooltips: true,
+		tooltips: {
+			mode: 'dataset',
+
+			titleFontColor: '#fff',
+			titleSpacing: 0,
+			titleMarginBottom: 0,
+
+			bodyFontColor: "rgba(0,0,0,1)",
+
+			footerFontColor: '#fff',
+			footerSpacing: 0,
+			footerMarginTop: 0,
+
+			footerFontColor: '#fff',
+			footerSpacing: 0,
+			footerMarginTop: 10,
+
+			backgroundColor : 'rgba(0,0,0,0)',
+			yPadding: 0,
+			xPadding: 0,
+
+			mode: 'single',
+			callbacks: {
+				label: function(tooltipItems, data) {
+					// eigene Labels
+					return tooltipItems.yLabel + ' €';
+				},
+				// eigene Header ???
 			}
+		},
+		scales: {
+			yAxes: [{ticks: {
+						beginAtZero:true
+						}
+					}],
+			xAxes: [{gridLines: {
+						display:false
+						}
+					}],
 		}
+	};
+	
+	var myChart = new Chart(ctx, {
+		type: "bar",
+		data: barChartData,
+		options: options,
 	});
-	refreshChart('maxday', myChart);
+	//refreshChart('maxday', myChart);
 
 	// Update alle 5 Minuten
 	setInterval(function(){
 		refreshChart('maxday', myChart);
 	}, 300000);
 	</script>
+
+
+
+
 </body>
 </html>
