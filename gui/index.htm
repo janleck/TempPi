@@ -33,11 +33,28 @@
 			<div class="col-sm-8">
 				<div class="row">
 					<div class="col-sm-12 kachel-l">
-						<canvas id="myChart" width="400" height="400"></canvas>
+						<canvas id="myChart" width="450" height="200"></canvas>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-12 kachel-s">Table</div>
+					<div class="col-sm-12 kachel-s">
+					<h4>Maximale Werte der letzten 7 Tage</h4>
+					<table class="table">
+						<thead>
+							<tr>
+								<td>Mo</td><td>Di</td><td>Mi</td><td>Do</td><td>Fr</td><td>Sa</td><td>So</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="danger">
+								<td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
+							</tr>
+							<tr class="info">
+								<td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
+							</tr>
+						</tbody>
+					</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -57,81 +74,17 @@
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="chart/Chart.bundle.min.js"></script>
 	<script src="chart/tooltip_plugin.js"></script>
+	<script src="chart/myChart.js"></script>
 	<script src="loader.js"></script>
 
 <script>
-	// Init
-	var ctx = $('#myChart').get(0).getContext('2d');
-	var barChartData = {
-			labels: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
-			datasets: [{
-				label: 'Temp(max.)',
-				data: [1,2,3,3,2,2,1],
-				backgroundColor: 'rgb(249,78,35)',
-				},
-				{
-				label: 'Humm(max.)',
-				data: [0,0,0,0,0,0,0],
-				backgroundColor: 'rgb(21,65,118)',
-				}
-			],
-		};
-	var options = {
-		showAllTooltips: true,
-		tooltips: {
-			mode: 'dataset',
-
-			titleFontColor: '#fff',
-			titleSpacing: 0,
-			titleMarginBottom: 0,
-
-			bodyFontColor: "rgba(0,0,0,1)",
-
-			footerFontColor: '#fff',
-			footerSpacing: 0,
-			footerMarginTop: 0,
-
-			footerFontColor: '#fff',
-			footerSpacing: 0,
-			footerMarginTop: 10,
-
-			backgroundColor : 'rgba(0,0,0,0)',
-			yPadding: 0,
-			xPadding: 0,
-
-			mode: 'single',
-			callbacks: {
-				label: function(tooltipItems, data) {
-					// eigene Labels
-					return tooltipItems.yLabel + ' €';
-				},
-				// eigene Header ???
-			}
-		},
-		scales: {
-			yAxes: [{ticks: {
-						beginAtZero:true
-						}
-					}],
-			xAxes: [{gridLines: {
-						display:false
-						}
-					}],
-		}
-	};
-	
-	var myChart = new Chart(ctx, {
-		type: "bar",
-		data: barChartData,
-		options: options,
-	});
+	// erste Werte laden
 	//refreshChart('maxday', myChart);
-
 	// Update alle 5 Minuten
 	setInterval(function(){
 		refreshChart('maxday', myChart);
 	}, 300000);
-	</script>
+</script>
 
 
 

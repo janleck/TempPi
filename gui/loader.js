@@ -14,6 +14,7 @@ function getInfos(dir, callback){
 }
 
 function refreshChart(dir,chart){
+	// Aktualisiert die letzten 14 Stunden
 	var r = $.ajax({
 		url:'http://temppi:8080/'+dir,
 		type:'get',
@@ -22,8 +23,10 @@ function refreshChart(dir,chart){
 		success:function(response,status,jqXHR){
 				temperaturen = response.Tmax;
 				feuchtigkeiten = response.Hmax;
+				labels = response.Labels;
 				myChart.data.datasets[0].data = temperaturen;
 				myChart.data.datasets[1].data = feuchtigkeiten;
+				myChart.labels = labels;
 			},
 		error:function(jqXHR, status, data){console.log(status);},
 		})

@@ -16,11 +16,11 @@
 
 
 [class*="kachel-"] {text-align: center;}
-.kachel-s {height: 100px;}
+.kachel-s {height: 200px;}
 .kachel-m {
 	height: 300px;
 	padding-top: 150px;
 	font-size: 4em;
 	line-height: 0;
 }
-.kachel-l {height: 500px;}
+.kachel-l {height: 400px;}
