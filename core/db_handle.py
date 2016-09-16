@@ -7,19 +7,13 @@ import datetime
 import json
 import ConfigParser
 
-def Credentials(user):
+def Credentials():
 	c = ConfigParser.ConfigParser()
 	c.read('pw.cfg')
+	creds = c.defaults()
+	creds['port'] = int(creds['port']) 
 	# Config in Dict packen:
-	return
-
-def hourly():
-	print "This is hourly"
-	return
-
-def daily():
-	print "This is daily"
-	return
+	return creds
 
 def getMittelwert(arr):
 	if len(arr):
@@ -52,7 +46,7 @@ if __name__ == "__main__":
 	@app.route('/now')
 	@enable_cors
 	def getNow():
-		creds = Credentials('alle')
+		creds = Credentials()
 		con = mysql.connect(creds["server"], creds["user"], creds["pw"], creds["db"], port=creds["port"])
 		cur = con.cursor()
 		cur.execute("SELECT Zeit, Temperatur, Feuchte FROM  Minuten ORDER BY Zeit DESC LIMIT 1")
@@ -70,7 +64,7 @@ if __name__ == "__main__":
 	@enable_cors
 	def today():
 		# Neuesten Zeitstempel finden
-		creds = Credentials('alle')
+		creds = Credentials()
 		con = mysql.connect(creds["server"], creds["user"], creds["pw"], creds["db"], port=creds["port"])
 		cur = con.cursor()
 		cur.execute("SELECT Zeit FROM  Minuten ORDER BY Zeit DESC LIMIT 1")
@@ -94,6 +88,21 @@ if __name__ == "__main__":
 			returnObj[x]['T'] = getMittelwert(arrT)
 			returnObj[x]['H'] = getMittelwert(arrH)
 		return json.dumps(returnObj)
+	
+	@app.route('/maxday')
+	@enable_cors
+	def maxDay():
+		creds = Credentials()
+		con = mysql.connect(creds["server"], creds["user"], creds["pw"], creds["db"], port=creds["port"])
+		cur = con.cursor()
+		cur.execute("SELECT Zeit,Tmax,Hmax FROM Tage ORDER BY Zeit DESC LIMIT 7")
+		con.commit()
+		result = {}
+		for row in cur:
+			tag = row[0].strftime("%a")
+			result[tag]=[row[1],row[2]]
+		con.close()
+		return json.dumps(result)
 
 
 	# Start Service

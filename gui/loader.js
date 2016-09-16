@@ -13,12 +13,24 @@ function getInfos(dir, callback){
 			);
 }
 
-
-function refreshMaximums(){
-	getInfos('now', function(r) {
-		global temperaturen = [1,2,3,4]; // r.
-		global feuchtigkeiten = [2,3,4,2]; // r.
-	})
+function refreshChart(dir,chart){
+	var r = $.ajax({
+		url:'http://temppi:8080/'+dir,
+		type:'get',
+		crossDomain:true,
+		timeout:4000,
+		success:function(response,status,jqXHR){
+				temperaturen = response.Tmax;
+				feuchtigkeiten = response.Hmax;
+				myChart.data.datasets[0].data = temperaturen;
+				myChart.data.datasets[1].data = feuchtigkeiten;
+			},
+		error:function(jqXHR, status, data){console.log(status);},
+		})
+		.done(function(response,status,jqXHR){
+				chart.update()
+				}
+	);
 }
 
 function refreshNow() {

@@ -60,48 +60,54 @@
 
 	<script>
 	// Init
-	
-	var temperaturen// = el[0];
-	var feuchtigkeiten// = el[1];
-	refreshMaximums();
-	console.log(temperaturen);
 	var ctx = document.getElementById("myChart");
 	var myChart = new Chart(ctx, {
 		type: 'bar',
 		data: {
 			labels: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
 			datasets: [{
-				xLabels: temperaturen,
 				label: 'Temp(max.)',
-				data: temperaturen,
+				data: [0,0,0,0,0,0,0],
 				backgroundColor: 'rgb(255,204,0)',
 			},
 			{
-				xLabels: feuchtigkeiten,
 				label: 'Humm(max.)',
-				data: feuchtigkeiten,
+				data: [0,0,0,0,0,0,0],
 				backgroundColor: 'rgb(21,65,118)',
 			}]
 		},
 		options: {
+			animation: false,
+			responsive : true,
+			tooltipTemplate: "<%= value %>",
+			tooltipFillColor: "rgba(0,0,0,0)",
+			tooltipFontColor: "#444",
+			tooltipEvents: [],
+			tooltipCaretSize: 0,
+			onAnimationComplete: function(){
+				this.showTooltip(this.datasets[0].bars, true);
+				this.showTooltip(this.datasets[1].bars, true);
+			},
 			scales: {
 				yAxes: [{
 					ticks: {
 						beginAtZero:true
 					}
 				}],
+				xAxes: [{
+					gridLines: {
+						display:false
+                	}
+				}],
 			}
 		}
 	});
+	refreshChart('maxday', myChart);
 
-	// Update:
+	// Update alle 5 Minuten
 	setInterval(function(){
-		el = refreshMaximums();
-		temperaturen = el[0];
-		feuchtigkeiten = el[1];
-		myChart.data.datasets[0].data = temperaturen;
-		myChart.data.datasets[1].data = feuchtigkeiten;
-	}, 50000);
+		refreshChart('maxday', myChart);
+	}, 300000);
 	</script>
 </body>
 </html>

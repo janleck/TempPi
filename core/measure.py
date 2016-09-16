@@ -14,7 +14,7 @@ if __name__ == "__main__":
 	HUM = Feuchtigkeit(0, TEMP.wert, intervall, runden=3)
 	i = 0
 
-	creds = db_handle.Credentials('alle')
+	creds = db_handle.Credentials()
 
 	while True:
 		time.sleep(1)
