@@ -26,7 +26,7 @@ def daily():
 	cur.execute("SELECT Zeit, Feuchte FROM  `Minuten` WHERE Zeit LIKE %s ORDER BY `Minuten`.`Temperatur` DESC LIMIT 1", [now_ts])
 	con.commit()
 	Hmax = cur.fetchone()[1]
-	cur.execute("INSERT INTO Tage(Tmax,Hmax) VALUES(%s,%s)", [Tmax, Hmax])
+	cur.execute("INSERT INTO Tage(Tmax,Hmax,Zeit) VALUES(%s,%s,%s)", [Tmax, Hmax, now.strftime("%Y-%m-%d")])
 	con.commit()
 	con.close()
 	return

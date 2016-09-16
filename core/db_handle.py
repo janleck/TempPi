@@ -9,7 +9,7 @@ import ConfigParser
 
 def Credentials():
 	c = ConfigParser.ConfigParser()
-	c.read('pw.cfg')
+	c.read('core/pw.cfg')
 	creds = c.defaults()
 	creds['port'] = int(creds['port']) 
 	# Config in Dict packen:
@@ -87,7 +87,8 @@ if __name__ == "__main__":
 				arrH.append(row[1])
 			returnObj[x]['T'] = getMittelwert(arrT)
 			returnObj[x]['H'] = getMittelwert(arrH)
-		return json.dumps(returnObj)
+		return returnObj
+	
 	
 	@app.route('/maxday')
 	@enable_cors

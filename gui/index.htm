@@ -16,8 +16,8 @@
 
 <body>
 	
-	<h2>Klima-Überwachung unseres Büros</h2>
 	<div class="container-fluid">
+		<h1>Klima-Überwachung unseres Büros</h1>
 		<div class="row-eq-height">
 			<div class="col-sm-4">
 				<div class="row">
@@ -26,7 +26,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-12 kachel-m id="humm"">X rel. %</div>
+					<div class="col-sm-12 kachel-m" id="humm">X rel. %</div>
 				</div>
 			</div>
 
@@ -41,15 +41,15 @@
 					<h4>Maximale Werte der letzten 7 Tage</h4>
 					<table class="table">
 						<thead>
-							<tr>
+							<tr id="tbl_heads">
 								<td>Mo</td><td>Di</td><td>Mi</td><td>Do</td><td>Fr</td><td>Sa</td><td>So</td>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="danger">
+							<tr class="danger" id="tbl_temps">
 								<td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
 							</tr>
-							<tr class="info">
+							<tr class="info" id="tbl_humm">
 								<td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
 							</tr>
 						</tbody>
@@ -59,12 +59,12 @@
 			</div>
 		</div>
 
-		<div class="row-eq-height">
-			<div class="col-sm-4">
+		<div class="row-eq-height mfoot">
+			<div id="messpkt" class="col-sm-4">
 				Footer
 			</div>
 			<div class="col-sm-8">
-				Footer
+				<strong>Raspberry Pi</strong> - Raspbian Wheezy - Temperaturfühler & Feuchtigkeitssensor (GPIO)
 			</div>
 		</div>
 
@@ -79,10 +79,13 @@
 
 <script>
 	// erste Werte laden
-	//refreshChart('maxday', myChart);
+	refreshChart('maxday', myChart);
 	// Update alle 5 Minuten
 	setInterval(function(){
-		refreshChart('maxday', myChart);
+		setTimeout(function() {
+			refreshChart('hours', myChart);
+		}, 1000);
+		resetChart(myChart);
 	}, 300000);
 </script>
 

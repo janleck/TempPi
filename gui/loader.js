@@ -21,34 +21,61 @@ function refreshChart(dir,chart){
 		crossDomain:true,
 		timeout:4000,
 		success:function(response,status,jqXHR){
-				temperaturen = response.Tmax;
-				feuchtigkeiten = response.Hmax;
-				labels = response.Labels;
-				myChart.data.datasets[0].data = temperaturen;
-				myChart.data.datasets[1].data = feuchtigkeiten;
-				myChart.labels = labels;
+				if (!response || response==""){return false;}
+				r = JSON.parse(response);
+				var d = {}; var labels = [];
+				var items = 0; var maxI = 14
+				for (var i=23; i > 0; i--) {
+					if (i in r && items < maxI){
+						items++;
+						d[i] = r[i];
+						labels.push(i);
+					}
+				}
+				labels = labels.sort();
+				var temps = []; var humms = []; var l;
+				for (i in labels){
+					if (labels[i] < l){
+						labels[i] = "-";
+						temps.push(0);
+						humms.push(0);
+					}else{
+						l = labels[i];
+						temps.push(d[l]["T"]);
+						humms.push(d[l]["H"]);
+					}
+				}
+				chart.data.datasets[0].data = temps;
+				chart.data.datasets[1].data = humms;
+				chart.data.labels = labels;
+				console.log(labels,temps,humms)
 			},
 		error:function(jqXHR, status, data){console.log(status);},
 		})
 		.done(function(response,status,jqXHR){
-				chart.update()
+				chart.update();
 				}
 	);
 }
 
+function resetChart(chart) {
+	chart.data.labels = ["-","-","-","-","-","-","-","-","-","-","-","-","-","-",];
+	chart.data.datasets[0].data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	chart.data.datasets[1].data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	chart.update();
+}
+
 function refreshNow() {
 	getInfos('now', function(r){
-		$('#temp').text(r.T);
-		$('#zeit').text(r.Z);
-		$('#humm').text(r.H);
+		$('#temp').text(r.T+"°C");
+		$('#messpkt').text(r.Z+" Uhr");
+		$('#humm').text(r.H+"%");
 	});
 }
 
-function refreshHours() {
-	getInfos('hours', function(r){
-		for (var index = 0; index < 24; index++) {
-			d[index] = r.T[index];
-		}
+function refreshDays() {
+	getInfos('days', function(r){
+		var d = {};
 	});
 	return d;
 }

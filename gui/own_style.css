@@ -1,12 +1,9 @@
+body{background-color: rgb(50,50,50);}
 [class*="col-"] {
 	padding-top: 15px;
 	padding-bottom: 15px;
-	background-color: #eee;
-	background-color: rgba(86, 61, 124, .15);
-	border: 1px solid #ddd;
-	border: 1px solid rgba(86, 61, 124, .2);
 }
-
+h1{color: #fff;}
 .row-eq-height {
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -15,7 +12,11 @@
 }
 
 
-[class*="kachel-"] {text-align: center;}
+[class*="kachel-"], .mfoot {
+	border: 10px solid rgb(50,50,50);
+	background-color: #fff;
+	text-align: center;
+	}
 .kachel-s {height: 200px;}
 .kachel-m {
 	height: 300px;
@@ -24,3 +25,12 @@
 	line-height: 0;
 }
 .kachel-l {height: 400px;}
+
+#temp{
+	font-weight: bold;
+	color: rgb(249,78,35);
+	}
+#humm{
+	font-weight: bold;
+	color: rgb(21,65,118);
+	}
