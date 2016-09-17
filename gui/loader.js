@@ -4,13 +4,9 @@ function getInfos(dir, callback){
 		type:'get',
 		crossDomain:true,
 		timeout:4000,
-		success:function(response,status,jqXHR){console.log("erfolgreich:");callback(response)},
+		success:function(response,status,jqXHR){callback(response)},
 		error:function(jqXHR, status, data){console.log(status);},
 		})
-		.done(function(response,status,jqXHR){
-				console.log('Done!');
-				}
-			);
 }
 
 function refreshChart(dir,chart){
@@ -21,33 +17,12 @@ function refreshChart(dir,chart){
 		crossDomain:true,
 		timeout:4000,
 		success:function(response,status,jqXHR){
-				if (!response || response==""){return false;}
-				r = JSON.parse(response);
-				var d = {}; var labels = [];
-				var items = 0; var maxI = 14
-				for (var i=23; i > 0; i--) {
-					if (i in r && items < maxI){
-						items++;
-						d[i] = r[i];
-						labels.push(i);
-					}
-				}
-				labels = labels.sort();
-				var temps = []; var humms = []; var l;
-				for (i in labels){
-					if (labels[i] < l){
-						labels[i] = "-";
-						temps.push(0);
-						humms.push(0);
-					}else{
-						l = labels[i];
-						temps.push(d[l]["T"]);
-						humms.push(d[l]["H"]);
-					}
-				}
-				chart.data.datasets[0].data = temps;
-				chart.data.datasets[1].data = humms;
-				chart.data.labels = labels;
+				if (!response || response.responseText==""){return false;}
+				var r = JSON.parse(response);
+				var a = splitDict(r);
+				chart.data.datasets[0].data = a["temps"];
+				chart.data.datasets[1].data = a["humms"];
+				chart.data.labels = a["labels"];
 			},
 		error:function(jqXHR, status, data){console.log(status);},
 		})
@@ -73,8 +48,31 @@ function refreshNow() {
 }
 
 function refreshDays() {
-	getInfos('days', function(r){
-		var d = {};
+	getInfos('maxday', function(r){
+		var result = JSON.parse(r);
+		var a = splitDict(result);
+		var t = ["labels", "temps", "humms"];
+		var els, wert;
+		for (var i=0;i<t.length;i++){
+			label = t[i];
+			els = $('#tbl_'+label+' td')
+			for (var i2=0;i2<els.length;i2++){
+				wert = Math.round(a[label][i2]*100)/100 || a[label][i2]
+				els[i2].innerText = String(wert);
+				if (label == "temps") {els[i2].innerText += "°C"}
+				if (label == "humms") {els[i2].innerText += "%"}
+			}
+		}
 	});
-	return d;
+}
+
+function splitDict(dictO) {
+	var labels = [];
+	for(var k in dictO) labels.push(k);
+	var temps = []; var humms = [];
+	for (var i=0; i<labels.length;i++){
+		temps.push(dictO[labels[i]]["T"]);
+		humms.push(dictO[labels[i]]["H"]);
+	}
+	return {"labels":labels, "temps":temps, "humms":humms}
 }

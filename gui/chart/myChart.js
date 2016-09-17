@@ -5,20 +5,20 @@ var barChartData = {
             label: 'Temp (DS)',
             data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             yAxisID: "y-axis-0",
-            backgroundColor: 'rgb(249,78,35)',
+            backgroundColor: 'rgb(234,64,21)',
             },
             {
             label: 'Humm (DS)',
             data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             yAxisID: "y-axis-1",
-            backgroundColor: 'rgba(21,65,118,0.85)',
+            backgroundColor: 'rgba(21,65,118,0.5)',
             }
         ],
     };
 var options = {
     showAllTooltips: false, // <<<<<<< DEAKTIVIERT !
     tooltips: {
-        mode: 'dataset',
+        mode: 'single',
         titleSpacing: 0,
         titleFontSize: 0,
         bodyFontColor: "#fff",
@@ -32,13 +32,8 @@ var options = {
         xPadding: 8,
         callbacks: {
             label: function(tooltipItems, data) {
-                if (tooltipItems.index == 13) {
-                    var a = tooltipItems.datasetIndex ? "%" : "°C";
-                    return tooltipItems.yLabel+a;
-                } else {
-                    return "";
-                }
-                
+                var a = tooltipItems.datasetIndex ? "%" : "°C";
+                return String(Math.round(tooltipItems.yLabel*100)/100)+a;
             },
             title: function(tooltipItem, data){return "";},
             footer: function(tooltipItem){return " ";}

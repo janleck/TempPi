@@ -76,7 +76,9 @@ if __name__ == "__main__":
 			return ""
 		# Stundenweise abfragen:
 		returnObj = {}
-		for x in range(1,aktS):
+		startH = aktS-14
+		startH = startH if startH > 0 else 1
+		for x in range(startH,aktS):
 			cur.execute("SELECT Temperatur, Feuchte FROM Minuten WHERE Zeit > %s AND Zeit < %s", [aktTS+str(x-1), aktTS+str(x)])
 			con.commit()
 			returnObj[x] = {'T':0, 'H':0}
@@ -87,7 +89,8 @@ if __name__ == "__main__":
 				arrH.append(row[1])
 			returnObj[x]['T'] = getMittelwert(arrT)
 			returnObj[x]['H'] = getMittelwert(arrH)
-		return returnObj
+		r = json.dumps(returnObj)
+		return r
 	
 	
 	@app.route('/maxday')
@@ -101,9 +104,10 @@ if __name__ == "__main__":
 		result = {}
 		for row in cur:
 			tag = row[0].strftime("%a")
-			result[tag]=[row[1],row[2]]
+			result[tag]={"H": row[2], "T": row[1]}
 		con.close()
-		return json.dumps(result)
+		r = json.dumps(result)
+		return r
 
 
 	# Start Service
