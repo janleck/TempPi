@@ -14,7 +14,7 @@ h1{color: #fff;}
 
 [class*="kachel-"], .mfoot {
 	border: 10px solid rgb(50,50,50);
-	background-color: #fff;
+	background-color: #e4e6f1;
 	text-align: center;
 	}
 .kachel-s {height: 200px;}
@@ -25,6 +25,7 @@ h1{color: #fff;}
 	line-height: 0;
 }
 .kachel-l {height: 400px;}
+.table {background-color: #fff;}
 
 #temp{
 	font-weight: bold;

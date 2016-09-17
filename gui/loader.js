@@ -48,7 +48,6 @@ function refreshChart(dir,chart){
 				chart.data.datasets[0].data = temps;
 				chart.data.datasets[1].data = humms;
 				chart.data.labels = labels;
-				console.log(labels,temps,humms)
 			},
 		error:function(jqXHR, status, data){console.log(status);},
 		})
