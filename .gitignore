@@ -1,3 +1,6 @@
 # Keine Configs hochladen
 /core/pw.cfg
+# Keine Einstellungen von VS Code
 /*vscode
+# Kein Bottle-Plugin    
+/core/paste/
