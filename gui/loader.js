@@ -51,6 +51,7 @@ function refreshDays() {
 	getInfos('maxday', function(r){
 		var result = JSON.parse(r);
 		var a = splitDict(result);
+		a['labels'] = sort_days(a['labels']); 
 		var t = ["labels", "temps", "humms"];
 		var els, wert;
 		for (var i=0;i<t.length;i++){
@@ -75,4 +76,11 @@ function splitDict(dictO) {
 		humms.push(dictO[labels[i]]["H"]);
 	}
 	return {"labels":labels, "temps":temps, "humms":humms}
+}
+
+function sort_days(days) {
+	var day_of_week = new Date().getDay();
+	var list = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+	var sorted_list = list.slice(day_of_week).concat(list.slice(0,day_of_week));
+	return days.sort(function(a,b) { return sorted_list.indexOf(a) > sorted_list.indexOf(b); });
 }
