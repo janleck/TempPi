@@ -5,6 +5,7 @@ import MySQLdb as mysql
 from bottle import Bottle, PasteServer, static_file, route, run, template, request, redirect, response, TEMPLATE_PATH
 import datetime
 import json
+from os import path
 import ConfigParser
 
 def Credentials():
@@ -25,7 +26,7 @@ def getMittelwert(arr):
 if __name__ == "__main__":
 	# Global Variables
 	app = Bottle()
-	TEMPLATE_PATH.insert(0,'gui')
+	TEMPLATE_PATH.insert(0,path.join(path.dirname(path.realpath(__file__)),'gui'))
 
 	# - enable cross-Browser Requests
 	def enable_cors(fn):

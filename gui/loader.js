@@ -1,6 +1,6 @@
 function getInfos(dir, callback){
 	var r = $.ajax({
-		url:'http://temppi:8080/'+dir,
+		url:'http://localhost:8080/'+dir,
 		type:'get',
 		crossDomain:true,
 		timeout:4000,
@@ -12,7 +12,7 @@ function getInfos(dir, callback){
 function refreshChart(dir,chart){
 	// Aktualisiert die letzten 14 Stunden
 	var r = $.ajax({
-		url:'http://temppi:8080/'+dir,
+		url:'http://localhost:8080/'+dir,
 		type:'get',
 		crossDomain:true,
 		timeout:4000,
