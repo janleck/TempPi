@@ -58,7 +58,7 @@ function refreshDays() {
 			label = t[i];
 			els = $('#tbl_'+label+' td')
 			for (var i2=0;i2<els.length;i2++){
-				wert = Math.round(a[label][i2]*100)/100 || a[label][i2]
+				wert = Math.round(a[label][i2]*100)/100 || a[label][i2] || "-"
 				els[i2].innerText = String(wert);
 				if (label == "temps") {els[i2].innerText += "°C"}
 				if (label == "humms") {els[i2].innerText += "%"}

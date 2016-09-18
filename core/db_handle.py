@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import MySQLdb as mysql
-from bottle import Bottle, PasteServer, static_file, route, run, template, request, redirect, response
+from bottle import Bottle, PasteServer, static_file, route, run, template, request, redirect, response, TEMPLATE_PATH
 import datetime
 import json
 import ConfigParser
@@ -25,6 +25,7 @@ def getMittelwert(arr):
 if __name__ == "__main__":
 	# Global Variables
 	app = Bottle()
+	TEMPLATE_PATH.insert(0,'gui')
 
 	# - enable cross-Browser Requests
 	def enable_cors(fn):
@@ -37,11 +38,22 @@ if __name__ == "__main__":
 				return fn(*args, **kwargs)
 		return _enable_cors
 
+	# Static Files
+	@app.route('/<filename:re:.*\.*>')
+	def stylesheets(filename):
+		return static_file(filename, root='gui')
+#	@app.route('/<filename:re:.*\.(jpg|png|gif|ico)>')
+#	def images(filename):
+#		return static_file(filename, root='img')
+#	@app.route('/<filename:re:.*\.js>')
+#	def images(filename):
+#		return static_file(filename, root='js')
+
 	# Routings
 	@app.route('/')
 	@enable_cors
 	def thisIsMe():
-		return "Temperatur-Testserver"
+		return template("index.htm")
 
 	@app.route('/now')
 	@enable_cors
@@ -111,4 +123,4 @@ if __name__ == "__main__":
 
 
 	# Start Service
-	run(app, host='0.0.0.0', port=8080, server=PasteServer, debug=True)
+	run(app, host='0.0.0.0', port=8080, server=PasteServer, debug=True, reloader=True)
