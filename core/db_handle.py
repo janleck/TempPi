@@ -46,12 +46,6 @@ if __name__ == "__main__":
 	@app.route('/<filename:re:.*\.*>')
 	def stylesheets(filename):
 		return static_file(filename, root=abs_Path+'gui')
-#	@app.route('/<filename:re:.*\.(jpg|png|gif|ico)>')
-#	def images(filename):
-#		return static_file(filename, root='img')
-#	@app.route('/<filename:re:.*\.js>')
-#	def images(filename):
-#		return static_file(filename, root='js')
 
 	# Routings
 	@app.route('/')
