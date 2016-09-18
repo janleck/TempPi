@@ -10,7 +10,7 @@ import ConfigParser
 
 def Credentials():
 	c = ConfigParser.ConfigParser()
-	c.read(path.join(abs_Path, 'core','pw.cfg'))
+	c.read(abs_Path+'core/pw.cfg')
 	creds = c.defaults()
 	creds['port'] = int(creds['port']) 
 	# Config in Dict packen:
@@ -26,8 +26,8 @@ def getMittelwert(arr):
 if __name__ == "__main__":
 	# Global Variables
 	app = Bottle()
-	abs_Path = path.abspath(path.join('home','pi','TempPi'))
-	TEMPLATE_PATH.insert(0,path.join(abs_Path,'gui'))
+	abs_Path = '/home/pi/TempPi/'))
+	TEMPLATE_PATH.insert(0, abs_Path+'gui'))
 
 	# - enable cross-Browser Requests
 	def enable_cors(fn):
@@ -43,7 +43,7 @@ if __name__ == "__main__":
 	# Static Files
 	@app.route('/<filename:re:.*\.*>')
 	def stylesheets(filename):
-		return static_file(filename, root=path.join(abs_Path, 'gui'))
+		return static_file(filename, root=abs_Path+'gui')
 #	@app.route('/<filename:re:.*\.(jpg|png|gif|ico)>')
 #	def images(filename):
 #		return static_file(filename, root='img')
