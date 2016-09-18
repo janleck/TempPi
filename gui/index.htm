@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">	
 	<title>Klima-Überwachung im Büro</title>
 	<!-- Bootstrap -->
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -95,6 +95,7 @@
 	// Update alle 5 Minuten
 	setInterval(function(){
 		setTimeout(function() {
+			refreshNow();
 			refreshChart('hours', myChart);
 			refreshDays();
 		}, 1000);
