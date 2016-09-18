@@ -26,8 +26,8 @@ def getMittelwert(arr):
 if __name__ == "__main__":
 	# Global Variables
 	app = Bottle()
-	abs_Path = '/home/pi/TempPi/'))
-	TEMPLATE_PATH.insert(0, abs_Path+'gui'))
+	abs_Path = '/home/pi/TempPi/'
+	TEMPLATE_PATH.insert(0, abs_Path+'gui')
 
 	# - enable cross-Browser Requests
 	def enable_cors(fn):
