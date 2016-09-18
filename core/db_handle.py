@@ -26,7 +26,8 @@ def getMittelwert(arr):
 if __name__ == "__main__":
 	# Global Variables
 	app = Bottle()
-	TEMPLATE_PATH.insert(0,'/home/pi/TempPi/gui')
+	abs_Path = '/home/pi/TempPi/gui'
+	TEMPLATE_PATH.insert(0,abs_Path)
 
 	# - enable cross-Browser Requests
 	def enable_cors(fn):
@@ -42,7 +43,7 @@ if __name__ == "__main__":
 	# Static Files
 	@app.route('/<filename:re:.*\.*>')
 	def stylesheets(filename):
-		return static_file(filename, root='gui')
+		return static_file(filename, root=abs_Path)
 #	@app.route('/<filename:re:.*\.(jpg|png|gif|ico)>')
 #	def images(filename):
 #		return static_file(filename, root='img')
