@@ -26,7 +26,7 @@ def getMittelwert(arr):
 if __name__ == "__main__":
 	# Global Variables
 	app = Bottle()
-	abs_Path = path.abspath('','home','pi','TempPi')
+	abs_Path = path.abspath(path.join('home','pi','TempPi'))
 	TEMPLATE_PATH.insert(0,path.join(abs_Path,'gui'))
 
 	# - enable cross-Browser Requests
