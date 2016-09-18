@@ -7,6 +7,7 @@ import datetime
 import json
 from os import path
 import ConfigParser
+import subprocess
 
 # Pfad-Variable:
 abs_Path = '/home/pi/TempPi/'
