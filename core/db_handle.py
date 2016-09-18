@@ -56,8 +56,11 @@ if __name__ == "__main__":
 	# Routings
 	@app.route('/')
 	@enable_cors
-	def thisIsMe():
-		return template("index.htm")
+	def thisIsMe():#
+		comm = "hostname -I"
+		proc = subprocess.Popen(args=comm, stdout=subprocess.PIPE, shell=True)
+		(ip, err) = proc.communicate() 
+		return template("index.htm", ip=ip)
 
 	@app.route('/now')
 	@enable_cors
