@@ -8,6 +8,9 @@ import json
 from os import path
 import ConfigParser
 
+# Pfad-Variable:
+abs_Path = '/home/pi/TempPi/'
+
 def Credentials():
 	c = ConfigParser.ConfigParser()
 	c.read(abs_Path+'core/pw.cfg')
@@ -26,7 +29,6 @@ def getMittelwert(arr):
 if __name__ == "__main__":
 	# Global Variables
 	app = Bottle()
-	abs_Path = '/home/pi/TempPi/'
 	TEMPLATE_PATH.insert(0, abs_Path+'gui')
 
 	# - enable cross-Browser Requests
