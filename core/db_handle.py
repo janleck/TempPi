@@ -26,7 +26,7 @@ def getMittelwert(arr):
 if __name__ == "__main__":
 	# Global Variables
 	app = Bottle()
-	TEMPLATE_PATH.insert(0,path.join(path.dirname(path.realpath(__file__)),'gui'))
+	TEMPLATE_PATH.insert(0,path.join(path.dirname(path.realpath(__file__)),'..','gui'))
 
 	# - enable cross-Browser Requests
 	def enable_cors(fn):
