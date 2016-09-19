@@ -3,7 +3,7 @@ body{background-color: rgb(50,50,50);}
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
-h1{color: #fff;}
+h1{color: #fff;font-weight: bold;}
 .row-eq-height {
 	display: -webkit-box;
 	display: -webkit-flex;
