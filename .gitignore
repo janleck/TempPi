@@ -1,5 +1,6 @@
 # Keine Configs hochladen
 /core/pw.cfg
+pw.cfg
 
 # Keine Einstellungen von VS Code oder Systemdateien
 /*vscode
