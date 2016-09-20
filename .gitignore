@@ -4,8 +4,8 @@ pw.cfg
 
 # Keine Einstellungen von VS Code oder Systemdateien
 /*vscode
-#/*._*
-#._*
+/*._*
+._*
 
 # Kein Bottle-Plugin    
 /core/paste/
