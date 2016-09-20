@@ -17,14 +17,14 @@ h1{color: #fff;font-weight: bold;}
 	background-color: #e4e6f1;
 	text-align: center;
 	}
-.kachel-s {height: 200px;}
+.kachel-s {height: 300px;}
 .kachel-m {
-	height: 300px;
+	height: 400px;
 	padding-top: 150px;
 	font-size: 4em;
 	line-height: 0;
 }
-.kachel-l {height: 400px;}
+.kachel-l {height: 500px;}
 .table {background-color: #fff;}
 
 #temp{
