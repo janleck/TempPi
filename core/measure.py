@@ -5,13 +5,14 @@ import MySQLdb as mysql
 import spidev
 import time
 import db_handle
-from mysensors import *
+from TinkerforgeSensoren import *
 
 
 if __name__ == "__main__":
 	intervall = 60*15 # (15 Minuten)
-	TEMP = Temperatur(1, intervall, runden=3)
-	HUM = Feuchtigkeit(0, TEMP.wert, intervall, runden=3)
+	TEMP = TinkerforgeTemperature('123',intervall)
+	HUM = TinkerforgeHumidity('456',intervall)
+
 	i = 0
 
 	creds = db_handle.Credentials()
