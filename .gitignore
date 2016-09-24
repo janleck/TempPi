@@ -9,3 +9,7 @@ pw.cfg
 
 # Kein Bottle-Plugin    
 /core/paste/
+
+# keine interpretierten Pythonmodule
+*.pyc
+/*.pyc
