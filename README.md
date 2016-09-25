@@ -20,7 +20,8 @@ Nur für Anschlüsse an die GPIO Schnittstelle
 
 Um die USB-Module mit Python ansteuern zu können:
 
-<pre><code>sudo apt-get install</code></pre>
+- Auf <a href='http://www.tinkerforge.com/de/doc/Downloads.html'>http://www.tinkerforge.com/de/doc/Downloads.html</a> die Bindings für Python herunterladen.
+- Im Verzeichnis der Bindings `sudo python setup.py install` ausführen.
 
 
 
