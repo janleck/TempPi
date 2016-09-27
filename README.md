@@ -25,9 +25,9 @@ Um die USB-Module mit Python ansteuern zu können:
 
 Installation des Brick-Deamons auf dem Raspberry Pi
 
-`sudo apt-get install libusb-1.0-0 libudev0 pm-utils`
-`wget http://download.tinkerforge.com/tools/brickd/linux/brickd_linux_latest_armhf.deb`
-`sudo dpkg -i brickd_linux_latest_armhf.deb`
+- `sudo apt-get install libusb-1.0-0 libudev0 pm-utils`
+- `wget http://download.tinkerforge.com/tools/brickd/linux/brickd_linux_latest_armhf.deb`
+- `sudo dpkg -i brickd_linux_latest_armhf.deb`
 
 ## Device Support
 
