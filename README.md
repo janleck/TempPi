@@ -18,12 +18,12 @@ Nur für Anschlüsse an die GPIO Schnittstelle
 
 ### Tinkerforgelib
 
-Um die USB-Module mit Python ansteuern zu können:
+#### Um die USB-Module mit Python ansteuern zu können:
 
 - Auf <a href='http://www.tinkerforge.com/de/doc/Downloads.html'>http://www.tinkerforge.com/de/doc/Downloads.html</a> die Bindings für Python herunterladen.
 - Im Verzeichnis der Bindings `sudo python setup.py install` ausführen.
 
-Installation des Brick-Deamons auf dem Raspberry Pi
+#### Installation des Brick-Deamons auf dem Raspberry Pi
 
 - `sudo apt-get install libusb-1.0-0 libudev0 pm-utils`
 - `wget http://download.tinkerforge.com/tools/brickd/linux/brickd_linux_latest_armhf.deb`
